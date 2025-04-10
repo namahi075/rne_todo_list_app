@@ -1,92 +1,17 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, FlatList, Button, Image } from "react-native";
-import logo from "./assets/logo.png";
-export default function App() {
-  const todos = [
-    { id: "1", text: "task 1" },
-    { id: "2", text: "task 2" },
-    { id: "3", text: "task 3" },
-    { id: "4", text: "task 4" },
-    { id: "5", text: "task 5" },
-    { id: "6", text: "task 6" },
-    { id: "7", text: "task 7" },
-    { id: "8", text: "task 8" },
-    { id: "9", text: "task 9" },
-    { id: "10", text: "task 10" },
-    { id: "11", text: "task 11" },
-    { id: "12", text: "task 12" },
-    { id: "13", text: "task 13" },
-    { id: "14", text: "task 14" },
-    { id: "15", text: "task 15" },
-    { id: "16", text: "task 16" },
-    { id: "17", text: "task 17" },
-    { id: "18", text: "task 18" },
-    { id: "19", text: "task 19" },
-    { id: "20", text: "task 20" },
-  ];
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AddTodoScreen from "./pages/AddTodoScreen";
+import HomeScreen from "./pages/HomeScreen";
 
+const Stack = createNativeStackNavigator();
+
+export default function App() {
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Image source={logo} style={styles.logo} />
-        <Text style={styles.title}>My Todo List</Text>
-      </View>
-      <FlatList
-        data={todos}
-        renderItem={({ item }) => (
-          <Text style={styles.todoItem}>{item.text}</Text>
-        )}
-        keyExtractor={(item) => item.id}
-        style={styles.todoList}
-      />
-      <View
-        style={{
-          marginBottom: 20,
-        }}
-      >
-        <Button title="Add New Todo" onPress={() => {}} />
-      </View>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="AddTodo" component={AddTodoScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f8f9fa",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    paddingTop: 50,
-    paddingHorizontal: 20,
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
-    backgroundColor: "#007bff",
-    padding: 10,
-    borderRadius: 5,
-  },
-  logo: {
-    width: 30,
-    height: 30,
-    marginRight: 10,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
-    flex: 1,
-  },
-  todoList: {
-    alignSelf: "stretch",
-    marginBottom: 20,
-  },
-  todoItem: {
-    fontSize: 18,
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
-  },
-});
